@@ -1,5 +1,6 @@
 Python Learning Journal
-Under the guidance of GPT, I am revisiting Python basics and data analysis, focusing on practicing data manipulation with Pandas.
+
+Under the guidance of GPT, I am revisiting Python basics and data analysis, focusing on practicing data manipulation with Pandas.  
 Data source: https://www.kaggle.com/datasets/adilshamim8/tesla-stock-price-history
 
 Contents
@@ -11,6 +12,7 @@ Contents
 
 
 1️⃣ Data Loading & Inspection
+```
 import pandas as pd
 
 # Read a CSV file and return a DataFrame
@@ -38,18 +40,18 @@ print(df.isna().sum())
 # Show descriptive statistics of numeric columns: mean, std, min, max, etc.
 print(df.describe()) 
 
-
-2️⃣ loc & iloc
-- loc
-select rows/columns by their labels
-supports row/column names, boolean conditions, date ranges
+```
+2️⃣ loc & iloc  
+loc  
+select rows/columns by their labels  
+supports row/column names, boolean conditions, date ranges  
 slice is inclusive (both ends included)
 
--iloc
-select rows/columns by integer position
+iloc  
+select rows/columns by integer position  
 rows/columns start from 0
 
-
+```
 eg.
     A   B
 x  10  50
@@ -67,9 +69,10 @@ df.iloc[0]         # first row (row at position 0 -> 'x')
 df.iloc[1:3]       # rows 1 to 2 (exclusive of position 3)
 df.iloc[:, 0]      # first column (A)
 df.iloc[0, 1]      # element at row 0, col 1 -> 50
-
+```
 
 Exercises
+```
 -----Basic Exercises-----
 # 1. Use .loc to select all data of the first row
 df.loc[0]
@@ -115,23 +118,25 @@ df.iloc[-10:, [1,2]].sort_values(by='Close')
 # 13. Find records where Close > mean and Volume > mean
 df.loc[(df['Close'] > df['Close'].mean()) & (df['Volume'] > df['Volume'].mean()), ['Date','Close','Volume']]
 
-
-3️⃣ Boolean Indexing
-本质上就是条件筛选的延伸
+```
+3️⃣ Boolean Indexing  
+本质上就是条件筛选的延伸  
 It is essentially an extension of conditional filtering.
 
-区别是直接用布尔 Series 来选数据，而不是写在 loc 里
+区别是直接用布尔 Series 来选数据，而不是写在 loc 里  
 The difference is that you use a boolean Series directly to select data, instead of writing it inside .loc.
 
+```
 eg. 
 mask = df['Close'] > 1000
 df[mask]
+```
 
 用途：可以组合多个条件、复用筛选逻辑
 Usage: It allows combining multiple conditions and reusing filtering logic.
 
-
 Exercises
+```
 # 1. Filter rows where Close > 450
 con = df['Close'] > 450
 df[con]
@@ -147,9 +152,10 @@ df[con2]
 # 4. Find records where Close > mean and Volume < median
 con3 = (df['Close'] > df['Close'].mean()) & (df['Volume'] < df['Volume'].median())
 df[con3]
-
+```
 
 4️⃣ Missing Values Handling
+```
 Check missing values: 检查缺失值：
 df.isnull().sum()
 
@@ -158,14 +164,15 @@ df.dropna()
 
 Fill missing values:填充缺失值:
 df.fillna(0)                 # Fill with 0 用 0 填充
-
-
+```
 Exercises
+```
 # Fill missing values in Close with mean
 df['Close'].fillna(df['Close'].mean())
 
-
+```
 5️⃣ Data Type Conversion
+```
 # 查看数据类型 Check data types
 df.dtypes
 
@@ -175,9 +182,9 @@ df['Volume'] = df['Volume'].astype(float)
 
 #常见数据类型： Common data types:
 int, float, str, bool, category
-
-
+```
 Exercise
+```
 # 1. Convert Volume to float
 df['Volume'].astype(float)
 
@@ -190,10 +197,10 @@ df['Close_bool'] = (df['Close'] > 400).astype(bool)
 # 4. Convert Date to datetime and extract year into a new column 'Year'
 df['Date'] = pd.to_datetime(df['Date'])  
 df['Year'] = df['Date'].dt.year         
+```
 
 
-
-Practice makes perfect!
+Practice makes perfect!🍻
 
 
 
